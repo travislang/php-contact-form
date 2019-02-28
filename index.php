@@ -19,7 +19,8 @@ if(filter_has_var(INPUT_POST, 'submit')){
             $msgClass = 'alert-danger';
         } else {
             // passed
-            $toEmail = 'lang40cal@hotmail.com';
+            // need to fill this in with a valid email
+            $toEmail = 'test email';
             $subject = 'Contact Request From '.$name;
             $body = '<h2>Contact Request</h2
                     <h4>Name</h4><p>'.$name.'</p>
@@ -32,6 +33,17 @@ if(filter_has_var(INPUT_POST, 'submit')){
             $headers .= "Content-Type: test/html;charset=UTF-8" ."\r\n";
 
             // additional headers
+            $headers .= "From: " .$name. "<".$email.">". "\r\n";
+
+            if(mail($toEmail, $subject, $body, $headers)){
+                // email sent
+                $msg = 'Your email has been sent';
+                $msgClass = 'alert-sucess';
+            } else{
+                // failed
+                $msg = 'There was an issue. Your email did not send';
+                $msgClass = 'alert-sucess';
+            }
         }
     } else {
         // failed

@@ -12,7 +12,6 @@ if(filter_has_var(INPUT_POST, 'submit')){
 
     # check required fields
     if(!empty($email) AND !empty($name) && !empty($message)){
-        // passed
         // check email
         if(filter_var($email, FILTER_VALIDATE_EMAIL) == false){
             // failed
@@ -20,7 +19,19 @@ if(filter_has_var(INPUT_POST, 'submit')){
             $msgClass = 'alert-danger';
         } else {
             // passed
-            echo 'passed';
+            $toEmail = 'lang40cal@hotmail.com';
+            $subject = 'Contact Request From '.$name;
+            $body = '<h2>Contact Request</h2
+                    <h4>Name</h4><p>'.$name.'</p>
+                    <h4>Email</h4><p>'.$email.'</p>
+                    <h4>Message</h4><p>'.$message.'</p>
+                    ';
+
+            // email header
+            $headers = "MIME-Version: 1.0" ."\r\n";
+            $headers .= "Content-Type: test/html;charset=UTF-8" ."\r\n";
+
+            // additional headers
         }
     } else {
         // failed
